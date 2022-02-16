@@ -3,6 +3,12 @@ import { Form, Alert, InputGroup, Button, ButtonGroup } from "react-bootstrap";
 import '../App.css';
 import BookDataService from "../services/book.services"
 
+// Imports from MUI
+import FormControl from '@mui/material/FormControl';
+import MenuItem from '@mui/material/MenuItem';
+import Select from '@mui/material/Select';
+import InputLabel from '@mui/material/InputLabel';
+
 
 
 const AddBook = ({ id, setBookId }) => {
@@ -11,6 +17,7 @@ const AddBook = ({ id, setBookId }) => {
     const [title, setTitle] = useState("");
     const [author, setAuthor] = useState("");
     const [status, setStatus] = useState("Available");
+    const [age, setAge] = React.useState("");
 
     // State to handle error messages
     const [message, setMessage] = useState({ error: false, msg: "" });
@@ -22,7 +29,7 @@ const AddBook = ({ id, setBookId }) => {
     const handleSubmit = async (e) => {
         e.preventDefault();  // prevents the page refreshing on submit
         setMessage("");
-        if (title === "" || author === "") {
+        if (title === "" || author === "" || age === "") {
             setMessage({ error: true, msg: "All fields are mandatory!" });
             return;
         }
@@ -30,6 +37,7 @@ const AddBook = ({ id, setBookId }) => {
             title,
             author,
             status,
+            age,
         };
         console.log(newBook);
 
@@ -51,6 +59,7 @@ const AddBook = ({ id, setBookId }) => {
 
         setTitle("");
         setAuthor("");
+        setAge("")
     };
 
     // 2) Update
@@ -64,6 +73,7 @@ const AddBook = ({ id, setBookId }) => {
             setTitle(docSnap.data().title);
             setAuthor(docSnap.data().author);
             setStatus(docSnap.data().status);
+            setAge(docSnap.data().age);
         } catch (err) {
             setMessage({ error: true, msg: err.message });
         }
@@ -79,7 +89,7 @@ const AddBook = ({ id, setBookId }) => {
         }
     }, [id]);
 
-    
+
     return (
         <>
             <div className="p-4 box">
@@ -143,6 +153,24 @@ const AddBook = ({ id, setBookId }) => {
                             Not Available
                         </Button>
                     </ButtonGroup>
+
+                    {/* -------------- Dropdown START -------------- */}
+                    <FormControl fullWidth className="mb-3">
+                        <InputLabel id="demo-simple-select-label">Age</InputLabel>
+                        <Select
+                            labelId="demo-simple-select-label"
+                            id="demo-simple-select"
+                            value={age}
+                            label="Age"
+                            onChange={(e) => setAge(e.target.value)}
+                        >
+                            <MenuItem value={10}>Ten</MenuItem>
+                            <MenuItem value={20}>Twenty</MenuItem>
+                            <MenuItem value={30}>Thirty</MenuItem>
+                        </Select>
+                    </FormControl>
+                    {/* -------------- Dropdown END -------------- */}
+
                     <div className="d-grid gap-2">
                         <Button variant="primary" type="Submit">
                             Add/ Update

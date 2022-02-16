@@ -43,6 +43,7 @@ const BooksList = ({ getBookId }) => {
                         <th>Book Title</th>
                         <th>Book Author</th>
                         <th>Status</th>
+                        <th>Age</th>
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -54,6 +55,7 @@ const BooksList = ({ getBookId }) => {
                                 <td>{doc.title}</td>
                                 <td>{doc.author}</td>
                                 <td>{doc.status}</td>
+                                <td>{doc.age}</td>
                                 <td>
                                     <Button
                                         variant="secondary"

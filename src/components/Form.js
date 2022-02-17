@@ -162,7 +162,7 @@ const AddBook = ({ id, setBookId }) => {
                             id="demo-simple-select"
                             value={age}
                             label="Age"
-                            onChange={(e) => setAge(e.target.value)}
+                            onChange={(e) => { setAge(e.target.value) }}
                         >
                             <MenuItem value={10}>Ten</MenuItem>
                             <MenuItem value={20}>Twenty</MenuItem>
